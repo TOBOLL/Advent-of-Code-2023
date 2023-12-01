@@ -16,7 +16,8 @@ fun dailyTemplate(fileName: String) {
             }
 
             val testInput = readInput("$fileName")
-            println(testInput)
+            println("Part one: ")
+            println("Part two: ")
         }
     """.trimIndent()
 
