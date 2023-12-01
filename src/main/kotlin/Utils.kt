@@ -7,17 +7,21 @@ fun readInput(name: String) = Path("src/main/data/$name").readLines()
 fun dailyTemplate(fileName: String) {
     val content = """
         fun main() {
-            fun part1(input: List<String>): Int {
-                return input.size
+            val solver = ${fileName}(readInput("$fileName"))
+            
+            println("Part one: " + solver.taskOne().toString())
+            println("Part two: " + solver.taskTwo().toString())
+        }
+        
+        class ${fileName}(private val input: List<String>) {
+
+            fun taskOne(): Int {
+                return input.size 
             }
 
-            fun part2(input: List<String>): Int {
-                return input.size
+            fun taskTwo(): Int {
+                return input.size 
             }
-
-            val testInput = readInput("$fileName")
-            println("Part one: ")
-            println("Part two: ")
         }
     """.trimIndent()
 
