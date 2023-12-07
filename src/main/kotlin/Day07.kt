@@ -24,10 +24,6 @@ class Day07(private val input: List<String>) {
     fun taskTwo(): Long {
         val hands = createHandsWithJokers()
         val sortedResults = hands.sorted()
-        sortedResults.forEach {
-            if (it.cards.contains('J'))
-            println("cards: ${it.cards} figure: ${it.bestFigure}")
-        }
         return sortedResults.mapIndexed { index, hand -> hand.bid * (sortedResults.size - index) }.sum()
     }
 
@@ -80,16 +76,11 @@ class Day07(private val input: List<String>) {
         if (figure.maxBy { it.value }.value + numberOfJokers == 4 ) {
             return FOUR_OF_A_KIND
         }
-        var tempNumberOfJokers = numberOfJokers
-        if (figure.maxBy { it.value }.value + numberOfJokers == 3) {
-            tempNumberOfJokers -= (3 - figure.maxBy { it.value }.value)
-            if (figure.maxBy { it.value }.value + tempNumberOfJokers == 2) {
-                return FULL_HOUSE
-            }
-            return THREE_OF_A_KIND
+        if (figure.filter { it.value == 2 }.size == 2 && numberOfJokers == 1) {
+            return FULL_HOUSE
         }
-        if (figure.filter { it.value == 2 }.size == 2) {
-            return TWO_PAIR
+        if (figure.maxBy { it.value }.value + numberOfJokers == 3) {
+            return THREE_OF_A_KIND
         }
         if (figure.maxBy { it.value }.value + numberOfJokers == 2) {
             return ONE_PAIR
@@ -135,7 +126,6 @@ class Day07(private val input: List<String>) {
             'A' to 14,
         )
     }
-
 
     enum class Figure(val value: Int) {
         FIVE_OF_A_KIND(7),
