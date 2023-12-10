@@ -32,5 +32,5 @@ fun dailyTemplate(fileName: String) {
 }
 
 fun main() {
-    dailyTemplate("Day09")
+    dailyTemplate("Day10")
 }
